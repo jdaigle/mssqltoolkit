@@ -12,7 +12,7 @@ SELECT
     stat.last_user_scan,
     stat.user_lookups,
     stat.last_user_lookup,
-    stat.user_lookups,
+    stat.user_updates,
     stat.last_user_update
 FROM sys.objects o WITH (NOLOCK)
     INNER JOIN sys.indexes i WITH (NOLOCK)
@@ -21,7 +21,7 @@ FROM sys.objects o WITH (NOLOCK)
         ON pstat.object_id = i.object_id and pstat.index_id = i.index_id
     LEFT JOIN sys.dm_db_index_usage_stats stat
         ON stat.object_id = i.object_id AND stat.index_id = i.index_id
-WHERE o.object_id = OBJECT_ID('CHANGE ME OR REMOVE')
+WHERE o.object_id = OBJECT_ID('dbo.ScheduleEntries')
 ORDER BY
     o.name,
     i.type_desc,
