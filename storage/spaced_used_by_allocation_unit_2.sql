@@ -3,6 +3,7 @@ SELECT
     i.name AS index_name,
     i.type_desc as index_type,
     a.type_desc as allocation_unit_type,
+    p.data_compression_desc,
     p.rows,
     a.total_pages,
     a.used_pages,
