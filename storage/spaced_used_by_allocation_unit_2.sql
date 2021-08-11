@@ -14,8 +14,8 @@ SELECT
     p.rows / (CASE WHEN a.data_pages > 0 THEN a.data_pages ELSE NULL END) AS rows_per_page,
     (a.data_pages * 8 * 1024.0) / (CASE WHEN p.rows > 0 THEN p.rows ELSE NULL END) as bytes_per_row
 FROM sys.objects t
-INNER JOIN sys.indexes i ON t.OBJECT_ID = i.object_id
-INNER JOIN sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
-INNER JOIN sys.allocation_units a ON p.partition_id = a.container_id
+JOIN sys.indexes i ON t.OBJECT_ID = i.object_id
+JOIN sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
+JOIN sys.allocation_units a ON p.partition_id = a.container_id
 WHERE t.is_ms_shipped = 0
 ORDER BY t.name, i.type_desc, i.name
